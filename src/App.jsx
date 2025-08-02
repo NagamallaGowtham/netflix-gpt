@@ -1,10 +1,11 @@
 import './App.css'
+import Body from './components/Body'
 
 function App() {
 
   return (
     <>
-      <h1 className='text-2xl text-red-700 font-bold'>Netflix GPT</h1>
+      <Body />
     </>
   )
 }

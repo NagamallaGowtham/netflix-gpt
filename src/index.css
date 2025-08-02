@@ -1,0 +1,21 @@
+.logo-img {
+    width: 9.25rem;
+    height: 2.5rem;
+    color: rgb(229, 9, 20);
+    fill: currentColor;
+}
+
+.login-main-wrapper {
+    position: relative;
+    min-height: 100dvh;
+    background-color: #000000;
+}
+.login-main-wrapper::before {
+    content: "";
+    background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/258d0f77-2241-4282-b613-8354a7675d1a/web/IN-en-20250721-TRIFECTA-perspective_cadc8408-df6e-4313-a05d-daa9dcac139f_large.jpg");
+    background-size: cover;
+    background-position: center;
+    inset: 0px;
+    position: absolute;
+    opacity: 0.5;
+}
