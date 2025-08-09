@@ -1,3 +1,8 @@
+html, body {
+    overflow-x: hidden;
+    background-color: black;
+}
+
 .logo-img {
     width: 9.25rem;
     height: 2.5rem;
@@ -18,4 +23,29 @@
     inset: 0px;
     position: absolute;
     opacity: 0.5;
+}
+
+.video-bg {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+.video-bg iframe {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    pointer-events: none;
+}
+
+.video-title {
+    position: absolute;
+    max-width: 600px;
+    top: 35%;
+    left: 42%;
+    transform: translate(-100%, 0);
+}
+
+.hide-scroll::-webkit-scrollbar {
+    display: none;
 }

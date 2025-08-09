@@ -21,9 +21,9 @@ const VideoBackground = ({movieId}) => {
     getMovieVideos();
   }, [])
   return (
-    <div>
-      <iframe className='w-screen aspect-video fixed left-0 right-0 top-0'
-        src={"https://www.youtube.com/embed/"+trailerKey?.key+"?autoplay=1&mute=1&loop=1&playlist="+trailerKey?.key+""} 
+    <div className='video-bg'>
+      <iframe className=''
+        src={"https://www.youtube.com/embed/"+trailerKey?.key+"?autoplay=1&mute=1&loop=1&playlist="+trailerKey?.key+"&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&color=white"} 
         title="YouTube video player" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
         referrerPolicy="strict-origin-when-cross-origin" 
