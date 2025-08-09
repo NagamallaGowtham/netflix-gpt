@@ -25,3 +25,4 @@ dist-ssr
 
 # Files
 /src/utils/firebase.js
+/src/utils/movieapi.js

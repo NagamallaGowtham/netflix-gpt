@@ -1,15 +1,10 @@
 import { useRef, useState } from "react";
 import { formValidation } from "../utils/formValidation";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  updateProfile
-} from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import Header from "./Header";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
@@ -22,8 +17,6 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const navigate = useNavigate()
-  
   const handleSignIn = () => {
     setIsSignedIn(!isSignedIn);
     setErrorMessages({});
@@ -33,30 +26,17 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const message = formValidation(
-      emailRef.current.value,
-      passwordRef.current.value
-    );
+
+    const message = formValidation(emailRef.current.value, passwordRef.current.value);
     setErrorMessages(message);
 
     if (!errorMessages.length) {
       if (isSignedIn) {
-        signInWithEmailAndPassword(
-          auth,
-          emailRef.current.value,
-          passwordRef.current.value
-        )
+        signInWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
           .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            const {uid, displayName, email} = user
-            dispatch(addUser({
-                uid: uid,
-                displayName: displayName,
-                email: email
-            }));
             setAuthMsg("");
-            navigate("/browse");
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -64,27 +44,28 @@ const Login = () => {
             setAuthMsg(errorCode);
           });
       } else {
-        createUserWithEmailAndPassword(
-          auth,
-          emailRef.current.value,
-          passwordRef.current.value
-        )
+        createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
           .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
+            console.log(userRef);
             updateProfile(auth.currentUser, {
               displayName: userRef.current.value,
+              photoURL: ""
             })
               .then(() => {
                 // Profile updated!
-                const {uid, displayName, email} = auth.currentUser
-                dispatch(addUser({
+                const { uid, displayName, email, photoURL } = auth.currentUser;
+                console.log(auth);
+                dispatch(
+                  addUser({
                     uid: uid,
                     displayName: displayName,
-                    email: email
-                }));
+                    email: email,
+                    photoURL: photoURL
+                  })
+                );
                 setAuthMsg("");
-                navigate("/browse");
               })
               .catch((error) => {
                 // An error occurred
@@ -106,7 +87,7 @@ const Login = () => {
     <div className="login-main-wrapper">
       <div className="max-w-[1440px] mx-auto relative">
         <Header />
-        <div className="login-signup-form">
+        <div className="login-signup-form pt-25">
           <form
             className="max-w-[480px] mx-auto py-12 px-16 bg-black"
             onSubmit={handleSubmit}
