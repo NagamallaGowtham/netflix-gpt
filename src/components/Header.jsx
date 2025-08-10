@@ -55,7 +55,7 @@ const Header = () => {
       return () => unsubscribe();
   }, []);
   return (
-    <header className="py-6 px-12 bg-gradient-to-b from-black fixed top-0 left-0 right-0 z-30">
+    <header className="py-6 px-12 bg-gradient-to-b from-black fixed top-0 left-0 right-0 z-40">
       <div className="max-w-[1440px] w-full mx-auto flex justify-between items-center">
         <div className="logo">
           <svg
