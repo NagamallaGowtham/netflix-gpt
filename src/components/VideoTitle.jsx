@@ -4,7 +4,7 @@ const VideoTitle = ({title, overview}) => {
   return (
     <div className='video-title'>
       <h2 className='text-xl md:text-6xl text-white font-bold'>{title}</h2>
-      <p className='hidden md:inline-block py-6 text-lg text-white'>{overview}</p>
+      <p className='discription hidden md:inline-block my-6 text-lg text-white'>{overview}</p>
       <div className="cta-wrapper">
         <button className="bg-white text-black p-2 text-xl rounded-lg min-w-[150px]">
           ▶️ Play

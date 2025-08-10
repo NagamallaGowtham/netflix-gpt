@@ -21,7 +21,7 @@ const VideoBackground = ({movieId}) => {
     getMovieVideos();
   }, [])
   return (
-    <div className='video-bg'>
+    <div className='video-bg after:bg-gradient-to-r after:w-full after:h-full after:from-[#332d2d] after:block after:absolute after:top-0'>
       <iframe className=''
         src={"https://www.youtube.com/embed/"+trailerKey?.key+"?autoplay=1&mute=1&loop=1&playlist="+trailerKey?.key+"&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&iv_load_policy=3&color=white"} 
         title="YouTube video player" 

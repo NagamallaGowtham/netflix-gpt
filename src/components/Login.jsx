@@ -10,6 +10,7 @@ const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [errorMessages, setErrorMessages] = useState({});
   const [authMsg, setAuthMsg] = useState("");
+  const [displayName, setDisplayName] = useState("");
 
   const userRef = useRef();
   const emailRef = useRef();
@@ -50,7 +51,7 @@ const Login = () => {
             const user = userCredential.user;
             console.log(userRef);
             updateProfile(auth.currentUser, {
-              displayName: userRef.current.value,
+              displayName: displayName,
               photoURL: ""
             })
               .then(() => {
@@ -102,6 +103,7 @@ const Login = () => {
                 placeholder="Full Name"
                 className="border-2 border-gray-200 bg-gray-300 w-full p-2.5 mt-5"
                 ref={userRef}
+                onChange={e => setDisplayName(e.target.value)}
               />
             )}
             <input

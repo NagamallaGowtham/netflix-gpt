@@ -15,7 +15,8 @@ html, body {
     min-height: 100dvh;
     background-color: #000000;
 }
-.login-main-wrapper::before {
+.login-main-wrapper::before,
+.searchpage-main-wrapper::before {
     content: "";
     background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/258d0f77-2241-4282-b613-8354a7675d1a/web/IN-en-20250721-TRIFECTA-perspective_cadc8408-df6e-4313-a05d-daa9dcac139f_large.jpg");
     background-size: cover;
@@ -48,4 +49,13 @@ html, body {
 
 .hide-scroll::-webkit-scrollbar {
     display: none;
+}
+
+.discription {
+    height: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }

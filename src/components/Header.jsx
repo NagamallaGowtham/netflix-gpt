@@ -4,9 +4,14 @@ import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "../utils/firebase"
 import { addUser, removeUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import profileImg from '../assets/netflix_profile_icon.jpg'
+import { toggleGptSearch } from "../utils/gptSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/constants";
+import { selectLanguage } from "../utils/langSlice";
 
 const Header = () => {
   const checkUser = useSelector((store) => store.user);
+  const viewGptSearch = useSelector(store => store.gpt.showGptSearch)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -19,30 +24,38 @@ const Header = () => {
     });
   }
 
-  useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const { uid, displayName, email, photoURL } = user;
-                dispatch(
-                    addUser({
-                        uid: uid,
-                        displayName: displayName,
-                        email: email,
-                        photoURL: photoURL
-                    })
-                );
-                navigate("/browse")
-            } else {
-                // User is signed out
-                dispatch(removeUser())
-                navigate("/")
-            }
-        });
+  const handleGptSearch = () => {
+    dispatch(toggleGptSearch())
+  }
 
-        return () => unsubscribe();
-    }, []);
+  const handleLangSelect = (e) => {
+    dispatch(selectLanguage(e.target.value))
+  }
+
+  useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+          if (user) {
+              const { uid, displayName, email, photoURL } = user;
+              dispatch(
+                  addUser({
+                      uid: uid,
+                      displayName: displayName,
+                      email: email,
+                      photoURL: photoURL
+                  })
+              );
+              navigate("/browse")
+          } else {
+              // User is signed out
+              dispatch(removeUser())
+              navigate("/")
+          }
+      });
+
+      return () => unsubscribe();
+  }, []);
   return (
-    <header className="py-6 px-12 bg-gradient-to-b from-black fixed top-0 left-0 right-0 z-10">
+    <header className="py-6 px-12 bg-gradient-to-b from-black fixed top-0 left-0 right-0 z-30">
       <div className="max-w-[1440px] w-full mx-auto flex justify-between items-center">
         <div className="logo">
           <svg
@@ -60,11 +73,19 @@ const Header = () => {
           </svg>
         </div>
         {checkUser && (
-          <div className="user">
-              {checkUser.email}
-            <button className="text-white font-semibold cursor-pointer" onClick={handleSignout}>
-              Sign out
-            </button>
+          <div className="user flex items-center gap-4.5">
+            {viewGptSearch && (
+              <select className="p-2 bg-gray-900 text-white" name="language" id="lang-select" onChange={handleLangSelect}>
+                {SUPPORTED_LANGUAGES.map(lang => <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)}
+              </select>
+            )}
+            <button className="py-2 px-4 bg-purple-800 text-white rounded-lg cursor-pointer" onClick={handleGptSearch}>{viewGptSearch ? "Home Page" : "GPT Search"}</button>
+            <div className="profile flex items-center gap-2">
+              <img src={profileImg} className="w-[40px] h-[40px]" alt={checkUser.displayName} />
+              <button className="text-white font-semibold cursor-pointer" onClick={handleSignout}>
+                Sign out
+              </button>
+            </div>
           </div>
         )}
       </div>

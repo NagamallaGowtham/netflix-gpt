@@ -21,6 +21,16 @@
 - Custom Hook for Playing movies
 - create movieSlice
 - update Store with movies data
+- embedded the Youtube video and make it autoplay, mute and loop
+- Build Secondary Container Component
+- Build Movie list
+- Build movie card
+- TMDB Image CDN URL
+- usePopularMovies Custom hook
+- GPT Search Page
+- GPT Search Bar
+- Multi-language Feature in our App
+
 
 
 # Features
