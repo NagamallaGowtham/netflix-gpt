@@ -86,14 +86,14 @@ const Login = () => {
 
   return (
     <div className="login-main-wrapper">
-      <div className="max-w-[1440px] mx-auto relative">
+      <div className="max-w-[1504px] mx-auto px-5 md:px-8 relative">
         <Header />
         <div className="login-signup-form pt-25">
           <form
-            className="max-w-[480px] mx-auto py-12 px-16 bg-black"
+            className="max-w-[480px] mx-auto py-12 px-8 sm:px-16 bg-black"
             onSubmit={handleSubmit}
           >
-            <h2 className="text-[32px] text-white font-bold">
+            <h2 className="text-[20px] md:text-[32px] text-white font-bold">
               {isSignedIn ? "Sign In" : "Sign Up"}
             </h2>
             {!isSignedIn && (
@@ -101,7 +101,7 @@ const Login = () => {
                 type="text"
                 name="fullname"
                 placeholder="Full Name"
-                className="border-2 border-gray-200 bg-gray-300 w-full p-2.5 mt-5"
+                className="border-2 border-gray-200 bg-gray-300 w-full p-2 md:p-2.5 mt-4 md:mt-5"
                 ref={userRef}
                 onChange={e => setDisplayName(e.target.value)}
               />
@@ -110,7 +110,7 @@ const Login = () => {
               type="text"
               name="email"
               placeholder="Email Address"
-              className="border-2 border-gray-200 bg-gray-300 w-full p-2.5 mt-5"
+              className="border-2 border-gray-200 bg-gray-300 w-full p-2 md:p-2.5 mt-4 md:mt-5"
               ref={emailRef}
             />
             {errorMessages.email && (
@@ -120,7 +120,7 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="Password"
-              className="border-2 border-gray-200 bg-gray-300 w-full p-2.5 mt-5"
+              className="border-2 border-gray-200 bg-gray-300 w-full p-2 md:p-2.5 mt-4 md:mt-5"
               ref={passwordRef}
             />
             {errorMessages.password && (
@@ -129,16 +129,16 @@ const Login = () => {
               </p>
             )}
             {authMsg && (
-              <p className="text-red-600 font-medium mt-7">{authMsg}</p>
+              <p className="text-red-600 font-medium mt-5 md:mt-7">{authMsg}</p>
             )}
             <button
               type="submit"
-              className="mt-7 w-full bg-[#e50914] text-white p-2.5 cursor-pointer rounded-md hover:bg-[#c11119]"
+              className="mt-5 md:mt-7 w-full bg-[#e50914] text-white p-2 md:p-2.5 cursor-pointer rounded-md hover:bg-[#c11119]"
             >
               Sign In
             </button>
             {isSignedIn ? (
-              <p className="text-white font-small text-md mt-7">
+              <p className="text-white font-small text-md mt-5 md:mt-7">
                 New to Netflix?{" "}
                 <span
                   className="font-semibold hover:underline cursor-pointer"
@@ -148,7 +148,7 @@ const Login = () => {
                 </span>
               </p>
             ) : (
-              <p className="text-white font-small text-md mt-7">
+              <p className="text-white font-small text-md mt-5 md:mt-7">
                 Already registered?{" "}
                 <span
                   className="font-semibold hover:underline cursor-pointer"

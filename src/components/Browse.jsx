@@ -17,7 +17,7 @@ const Browse = () => {
     useTopRatedMovies();
     useUpcomingMovies();
   return (
-    <div className='max-w-[1440px] w-full mx-auto'>
+    <div className='max-w-[1504px] px-5 md:px-8 w-full mx-auto'>
         <Header />
         {viewGptSearch ? 
           <GptSearchPage /> : (

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "../utils/firebase"
 import { addUser, removeUser } from "../utils/userSlice";
@@ -10,6 +10,7 @@ import { SUPPORTED_LANGUAGES } from "../utils/constants";
 import { selectLanguage } from "../utils/langSlice";
 
 const Header = () => {
+  const [toggleMenu, setToggleMenu] = useState(false)
   const checkUser = useSelector((store) => store.user);
   const viewGptSearch = useSelector(store => store.gpt.showGptSearch)
 
@@ -31,6 +32,17 @@ const Header = () => {
   const handleLangSelect = (e) => {
     dispatch(selectLanguage(e.target.value))
   }
+
+  const handleToggleMenu = () => {
+    setToggleMenu(!toggleMenu);
+  }
+
+  useEffect(() => {
+    document.documentElement.classList.remove("closed-menu", "opened-menu");
+    toggleMenu ? 
+      (document.documentElement.classList.add("opened-menu")) :
+      (document.documentElement.classList.add("closed-menu"))
+  }, [toggleMenu])
 
   useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -55,8 +67,8 @@ const Header = () => {
       return () => unsubscribe();
   }, []);
   return (
-    <header className="py-6 px-12 bg-gradient-to-b from-black fixed top-0 left-0 right-0 z-40">
-      <div className="max-w-[1440px] w-full mx-auto flex justify-between items-center">
+    <header className="py-6 px-5 md:px-8 2xl:px-12 bg-gradient-to-b from-black fixed top-0 left-0 right-0 z-40">
+      <div className="max-w-[1504px] w-full mx-auto 2xl:px-8 flex justify-between items-center">
         <div className="logo">
           <svg
             className="logo-img"
@@ -73,20 +85,27 @@ const Header = () => {
           </svg>
         </div>
         {checkUser && (
-          <div className="user flex items-center gap-4.5">
-            {viewGptSearch && (
-              <select className="p-2 bg-gray-900 text-white" name="language" id="lang-select" onChange={handleLangSelect}>
-                {SUPPORTED_LANGUAGES.map(lang => <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)}
-              </select>
-            )}
-            <button className="py-2 px-4 bg-purple-800 text-white rounded-lg cursor-pointer" onClick={handleGptSearch}>{viewGptSearch ? "Home Page" : "GPT Search"}</button>
-            <div className="profile flex items-center gap-2">
-              <img src={profileImg} className="w-[40px] h-[40px]" alt={checkUser.displayName} />
-              <button className="text-white font-semibold cursor-pointer" onClick={handleSignout}>
-                Sign out
-              </button>
+          <>
+            <div className={"toggle-menu " + (toggleMenu ? "opened" : "closed") } onClick={handleToggleMenu}>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
             </div>
-          </div>
+            <div className="user flex items-center gap-4.5">
+              {viewGptSearch && (
+                <select className="p-2 bg-gray-900 text-white" name="language" id="lang-select" onChange={handleLangSelect}>
+                  {SUPPORTED_LANGUAGES.map(lang => <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)}
+                </select>
+              )}
+              <button className="py-2 px-4 bg-purple-800 text-white rounded-lg cursor-pointer" onClick={handleGptSearch}>{viewGptSearch ? "Home Page" : "GPT Search"}</button>
+              <div className="profile flex items-center gap-2">
+                <img src={profileImg} className="w-[40px] h-[40px]" alt={checkUser.displayName} />
+                <button className="text-white font-semibold cursor-pointer" onClick={handleSignout}>
+                  Sign out
+                </button>
+              </div>
+            </div>
+          </>
         )}
       </div>
     </header>
