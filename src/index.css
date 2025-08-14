@@ -139,3 +139,53 @@ html.opened-menu {
 header:has(.toggle-menu.opened) {
     background-color: black;
 }
+
+.shimmer-ui-video-bg {
+    position: relative;
+    width: 100vw;
+    aspect-ratio: 16 / 9;
+    margin-left: calc(-50vw + 50%);
+    background-image: linear-gradient(90deg, #000000 33%, #353434 50%, #000000 66%, #000000);
+} 
+
+.video-title {
+    position: absolute;
+    max-width: 600px;
+    width: 100%;
+    top: 35%;
+    left: 42%;
+    transform: translate(-100%, 0);
+}
+.video-title .shimmer-ui-title {
+    height: 50px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-image: linear-gradient(90deg, #2c2929 33%, #987e7e 50%, #2c2929 66%, #2c2929);
+}
+.video-title .shimmer-ui-desc {
+    height: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-image: linear-gradient(90deg, #2c2929 33%, #987e7e 50%, #2c2929 66%, #2c2929);
+}
+.video-title .shimmer-ui-btn {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background-image: linear-gradient(90deg, #2c2929 33%, #987e7e 50%, #2c2929 66%, #2c2929);
+}
+
+.shimmer-ui-movielist {
+    background-image: linear-gradient(90deg, #2c2929 33%, #987e7e 50%, #2c2929 66%, #2c2929);
+}
+
+[class*="shimmer-ui"] {
+    background-size: 300% 100%;
+    animation: wave 2s infinite;
+}
+
+@keyframes wave {
+    0% {
+        background-position: right;
+    }
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import MovieCard from './MovieCard'
+import MovieListShimmer from './MovieListShimmer'
 
 const MovieList = ({title, movies}) => {
   return (
@@ -7,7 +8,7 @@ const MovieList = ({title, movies}) => {
         <h2 className='font-bold text-white text-2xl mb-3.5'>{title}</h2>
         <div className='flex gap-4 overflow-x-scroll hide-scroll'>
             {
-                movies?.map(movie => <MovieCard key={movie.id} movie={movie} />)
+                movies ? movies.map(movie => <MovieCard key={movie.id} movie={movie} />) : <MovieListShimmer />
             }
         </div>
     </div>
