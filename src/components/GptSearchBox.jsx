@@ -20,7 +20,7 @@ const GptSearchBox = () => {
         return json.results;
     }
 
-    const customisedPrompt =  "Act as a Movie Recommendation system and suggest some movies for the query : " + searchInput.current?.value + ". only give me names of 10 movies, comma seperated like the example result given ahead. Example Result: Bahibali, RRR, Mayabazar, Shiva, Satya";
+    const customisedPrompt =  "Give a straight forward answer as movie recommendations : " + searchInput.current?.value + "- only give me names of 10 movies, comma seperated like the example result given ahead. Example Result: Bahibali, RRR, Mayabazar, Shiva, Satya";
 
     const handleGptSearch = async () => {
         setIsDisabled(true);
